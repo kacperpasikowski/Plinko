@@ -24,26 +24,26 @@ function drawObstacles(){
 
 
     var spacingX = 40;
-    var spacingY = 40;
+    var spacingY = 35;
 
     for (var row = 0; row < rows -2; row++) {
         for (var col = 0; col < rows - row; col++) {
             var x = col * spacingX + spacingX / 2 + (width - (rows - row) * spacingX) / 2;
             var y = height - (row * spacingY + 50);
 
-            var obstacle = new Obstacle(x, y, 5);
+            var obstacle = new Obstacle(x, y, 3);
             obstacles.push(obstacle);
         }
     }
 }
 
 function newParticle(){
-    var ball = new Particle(400,50, 10);
+    var ball = new Particle(400,50, 8);
     particles.push(ball);
 }
 
 function draw() {
-    if(frameCount % 60 ===0){
+    if(frameCount % 120 ===0){
         newParticle();
     }
     background(51);

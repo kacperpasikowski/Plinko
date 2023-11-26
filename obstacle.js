@@ -1,7 +1,12 @@
-function Obstacle(x,y,r, isStatic = true){
+
+
+
+function Obstacle(x,y,r,){
     var options = {
-        isStatic: isStatic,
-    }
+        restitution: 1,
+        isStatic: true,
+        friction: 0,
+    };
     this.body= Bodies.circle(x,y, r, options);
     this.r =r;
     World.add(world, this.body);
@@ -20,3 +25,4 @@ Obstacle.prototype.show = function () {
     ellipse(0, 0, this.r * 2);
     pop();
 };
+

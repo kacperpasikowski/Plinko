@@ -1,5 +1,12 @@
+
 function Particle(x,y,r) {
-    this.body= Bodies.circle(x,y, r);
+    var restitution = 0.4;
+    var friction = 0.9;
+    var options = {
+        restitution: restitution,
+        friction: friction,
+    }
+    this.body= Bodies.circle(x,y, r, options);
     this.r =r;
     World.add(world, this.body);
 }
