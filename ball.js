@@ -1,6 +1,6 @@
 
 function Particle(x,y,r) {
-    var restitution = 0.4;
+    var restitution = 0.45;
     var friction = 0.9;
     var options = {
         restitution: restitution,

@@ -16,11 +16,14 @@ function setup() {
     world = engine.world; 
     newParticle();
     drawObstacles();
+    document.querySelector('.spawnButton').addEventListener('click', function () {
+        newParticle();
+    });
     
 }
 
 function drawObstacles(){
-    var rows = 12;
+    var rows = 14;
 
 
     var spacingX = 40;
@@ -29,7 +32,7 @@ function drawObstacles(){
     for (var row = 0; row < rows -2; row++) {
         for (var col = 0; col < rows - row; col++) {
             var x = col * spacingX + spacingX / 2 + (width - (rows - row) * spacingX) / 2;
-            var y = height - (row * spacingY + 50);
+            var y = height - (row * spacingY + 50) -50;
 
             var obstacle = new Obstacle(x, y, 3);
             obstacles.push(obstacle);
@@ -38,17 +41,16 @@ function drawObstacles(){
 }
 
 function newParticle(){
-    var ball = new Particle(400,50, 8);
+    var x = random(390, 420)
+    var ball = new Particle(x,85, 10);
     particles.push(ball);
 }
 
 function draw() {
-    if(frameCount % 120 ===0){
-        newParticle();
-    }
+
     background(51);
     Engine.update(engine);
-    for (var i =0; i <particles.length; i++){
+    for (var i =1; i <particles.length; i++){
         particles[i].show();
     }
     for(var i= 0; i < obstacles.length;i++){
