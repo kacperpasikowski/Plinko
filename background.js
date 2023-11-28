@@ -9,6 +9,7 @@ var engine;
 var world;
 var particles = [];
 var obstacles = [];
+var blocks = [];
 
 function setup() {
     createCanvas(800,600);
@@ -16,10 +17,26 @@ function setup() {
     world = engine.world; 
     newParticle();
     drawObstacles();
+    drawBlocks();
+
+    
     document.querySelector('.spawnButton').addEventListener('click', function () {
         newParticle();
     });
     
+    
+}
+function drawBlocks(){
+    var numBlocks =13;
+
+    for (var i = 0; i < numBlocks; i++) {
+
+        var x = 155 + i * 40+5.5;
+    
+        var block = new Block(x, 528, 35, 23, 2);
+    
+        blocks.push(block);
+    }
 }
 
 function drawObstacles(){
@@ -27,7 +44,7 @@ function drawObstacles(){
 
 
     var spacingX = 40;
-    var spacingY = 35;
+    var spacingY = 28;
 
     for (var row = 0; row < rows -2; row++) {
         for (var col = 0; col < rows - row; col++) {
@@ -42,7 +59,7 @@ function drawObstacles(){
 
 function newParticle(){
     var x = random(390, 420)
-    var ball = new Particle(x,85, 10);
+    var ball = new Particle(x,150, 10);
     particles.push(ball);
 }
 
@@ -53,8 +70,12 @@ function draw() {
     for (var i =1; i <particles.length; i++){
         particles[i].show();
     }
+
+
     for(var i= 0; i < obstacles.length;i++){
         obstacles[i].show();
     }
-    
+    for (var i =0; i<blocks.length; i++){
+        blocks[i].show();
+    }
 }
