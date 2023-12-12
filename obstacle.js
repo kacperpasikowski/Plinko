@@ -11,6 +11,7 @@ function Obstacle(x,y,r,){
     this.r =r;
     World.add(world, this.body);
     
+    
 } 
 
 Obstacle.prototype.show = function () {
