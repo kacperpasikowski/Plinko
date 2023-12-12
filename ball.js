@@ -22,11 +22,6 @@ Particle.prototype.show = function () {
         ellipse(0, 0, this.r * 2);
         pop();
     }
-    this.checkForRemoval();
+
 };
 
-Particle.prototype.checkForRemoval = function () {
-    if (this.body.label === 'ball' && this.body.position.y > height) {
-        this.body.remove = true;
-    }
-};

@@ -1,6 +1,3 @@
-
-
-
 function Obstacle(x,y,r,){
     var options = {
         restitution: 1,
