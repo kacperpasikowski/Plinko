@@ -4,24 +4,22 @@ var Engine = Matter.Engine,
     Events = Matter.Events;
 
 var engine, world;
-var particles = [];
+var ball = null;
 var obstacles = [];
 var bounds = [];
+var score = 1100;
 
 function setup() {
     createCanvas(800, 600);
     engine = Matter.Engine.create();
     world = engine.world;
-    newParticle();
     drawObstacles();
     drawBounds();
-
+    spawnBall();
 
     
 
-    document.querySelector('.spawnButton').addEventListener('click', function () {
-        newParticle();
-    });
+    
 }
 
 function drawBounds(){
@@ -57,52 +55,16 @@ function drawObstacles() {
     }
     
 }
-function handleCollision(event) {
-    const { pairs } = event;
 
-    pairs.forEach(pair => {
-        const { bodyA, bodyB } = pair;
-        const { label: labelA } = bodyA;
-        const { label: labelB } = bodyB;
-
-        if (labelA === 'ball') {
-            const bucketLabel = getBucketLabel(labelB);
-            if (bucketLabel) {
-                const bucketNumber = parseInt(bucketLabel.replace('boundary', ''));
-                updateScore(bucketNumber);
-                bodyA.remove = true; // Remove the ball
-            }
-        } else if (labelB === 'ball') {
-            const bucketLabel = getBucketLabel(labelA);
-            if (bucketLabel) {
-                const bucketNumber = parseInt(bucketLabel.replace('boundary', ''));
-                updateScore(bucketNumber);
-                bodyB.remove = true; // Remove the ball
-            }
-        }
-    });
-}
-
-function getBucketLabel(label) {
-    // Check if the label is a bucket label
-    if (label && label.startsWith('boundary')) {
-        return label;
-    }
-    return null;
-}
-
-function updateScore(bucketNumber) {
-    // Implement your scoring logic based on the bucket number
-    console.log(`Ball dropped into bucket ${bucketNumber}`);
-    // Add your scoring logic here
-}
-
-function newParticle() {
-    var x = random(390, 420);
-    var ball = new Particle(x, 150, 10);
-    particles.push(ball);
-    ball.body.label = ' ball';
-}
+// function newParticle() {
+//     var x = random(390, 420);
+//     var ball = new Particle(x, 150, 10);
+//     if (ball.body.position.y > 100) {
+//         // Ball is below the position of 200, so update the score
+//         //score += 200;
+//     }
+//     score -=100;
+// }
 
 
 
@@ -111,10 +73,28 @@ function draw() {
     background(51);
     Engine.update(engine);
     
-
-    for (var i = 1; i < particles.length; i++) {
-        particles[i].show();
-    }
+    fill("white");
+    textSize(30);
+    
+    text("Score: " + score,330, 60);
+    textSize(17);
+    text("500", 137, 590);
+    text("400 ", 179, 590);
+    text("300 ", 220, 590);
+    text("200 ", 261, 590);
+    text("100 ", 302, 590);
+    text(" 50 ", 343, 590);
+    text(" 50 ", 384, 590);
+    text(" 50 ", 425, 590);
+    text("100 ", 466, 590);
+    text("200 ", 507, 590);
+    text("300 ", 548, 590);
+    text("400 ", 589, 590);
+    text("500 ", 630, 590);
+    
+    
+    
+    
 
     for (var i = 0; i < obstacles.length; i++) {
         obstacles[i].show();
@@ -122,7 +102,22 @@ function draw() {
     for (var i = 0; i < bounds.length; i++) {
         bounds[i].show();
     }
+    if (ball !==null){
+        ball.show();
 
+        var pos = ball.body.position;
+        if(pos.y >580){
+            score +=200;
+            ball = null;
+        }
+    }
 
+    
 
+}
+function spawnBall(){
+    document.querySelector('.spawnButton').addEventListener('click', function () {
+        var x = random(390, 420);
+        ball = new Particle(x, 150, 10);
+    });
 }

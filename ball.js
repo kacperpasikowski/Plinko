@@ -13,7 +13,6 @@ function Particle(x, y, r) {
 }
 
 Particle.prototype.show = function () {
-    if (this.visible) {
         fill(255);
         stroke(255);
         var position = this.body.position;
@@ -21,7 +20,7 @@ Particle.prototype.show = function () {
         translate(position.x, position.y);
         ellipse(0, 0, this.r * 2);
         pop();
-    }
+    
 
 };
 
