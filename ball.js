@@ -20,7 +20,5 @@ Particle.prototype.show = function () {
         translate(position.x, position.y);
         ellipse(0, 0, this.r * 2);
         pop();
-    
-
 };
 

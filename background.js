@@ -7,7 +7,9 @@ var engine, world;
 var ball = null;
 var obstacles = [];
 var bounds = [];
-var score = 1100;
+var score = 1000;
+var lastScore = 0;
+var counter = 0;
 
 function setup() {
     createCanvas(800, 600);
@@ -23,7 +25,7 @@ function setup() {
 }
 
 function drawBounds(){
-    b = new Boundary(width/2, height + 50, width, 100);
+    b = new Boundary(width/2, height + 100, width, 100);
     bounds.push(b);
     
     for (let i = 3; i < 17; i ++) {
@@ -56,15 +58,7 @@ function drawObstacles() {
     
 }
 
-// function newParticle() {
-//     var x = random(390, 420);
-//     var ball = new Particle(x, 150, 10);
-//     if (ball.body.position.y > 100) {
-//         // Ball is below the position of 200, so update the score
-//         //score += 200;
-//     }
-//     score -=100;
-// }
+
 
 
 
@@ -74,9 +68,13 @@ function draw() {
     Engine.update(engine);
     
     fill("white");
+    stroke(20)
     textSize(30);
     
-    text("Score: " + score,330, 60);
+    text("Credits: " + score,320, 60);
+    textSize(22);
+    text("Last Scored: " + lastScore, 600, 60);
+    text("Sum: " + counter, 600, 100);
     textSize(17);
     text("500", 137, 590);
     text("400 ", 179, 590);
@@ -107,17 +105,68 @@ function draw() {
 
         var pos = ball.body.position;
         if(pos.y >580){
-            score +=200;
-            ball = null;
+            if(pos.x >137 && pos.x <179 || pos.x >630 && pos.x<680){
+                score +=500;
+                lastScore = 500;
+                counter +=500;
+                ball = null;
+            }
+            if(pos.x >179 && pos.x <220 || pos.x >589 && pos.x<630){
+                score +=400;
+                lastScore = 400;
+                counter +=400;
+                ball = null;
+            }
+            if(pos.x >220 && pos.x <261 || pos.x >548 && pos.x<589){
+                score +=300;
+                lastScore = 300;
+                counter +=300;
+                ball = null;
+            }
+            if(pos.x >261 && pos.x <302 || pos.x >507 && pos.x<548){
+                score +=200;
+                lastScore = 200;
+                counter +=200;
+                ball = null;
+            }
+            if(pos.x >302 && pos.x <343 || pos.x >466 && pos.x<507){
+                score +=100;
+                lastScore = 100;
+                counter +=100;
+                ball = null;
+            }
+            if(pos.x >343 && pos.x <466 || pos.x >589 && pos.x<630){
+                score +=50;
+                lastScore = 50;
+                counter +=50;
+                ball = null;
+            }
         }
     }
 
     
 
 }
-function spawnBall(){
+function spawnBall() {
     document.querySelector('.spawnButton').addEventListener('click', function () {
-        var x = random(390, 420);
-        ball = new Particle(x, 150, 10);
+        if (ball === null) {
+            if(score<=0){
+                var result = confirm("Przegrałeś wszystko! czy chcesz zacząć od początku?");
+                if (result){
+                    score = 1000;
+                    counter = 0;
+                    lastScore = 0;
+                }else {
+                    return;
+                }
+                return;
+            }
+            score -=100;
+            counter -=100;
+            var x = random(390, 420);
+            ball = new Particle(x, 150, 10);
+        }
     });
 }
+
+    
