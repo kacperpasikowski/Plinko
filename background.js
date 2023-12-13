@@ -135,7 +135,7 @@ function draw() {
                 counter +=100;
                 ball = null;
             }
-            if(pos.x >343 && pos.x <466 || pos.x >589 && pos.x<630){
+            if(pos.x >343 && pos.x <466){
                 score +=50;
                 lastScore = 50;
                 counter +=50;
@@ -163,6 +163,7 @@ function spawnBall() {
             }
             score -=100;
             counter -=100;
+
             var x = random(390, 420);
             ball = new Particle(x, 150, 10);
         }
