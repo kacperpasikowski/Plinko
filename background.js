@@ -10,6 +10,7 @@ var bounds = [];
 var score = 1000;
 var lastScore = 0;
 var counter = 0;
+var numOfThrows =0;
 
 function setup() {
     createCanvas(800, 600);
@@ -75,6 +76,8 @@ function draw() {
     textSize(22);
     text("Last Scored: " + lastScore, 600, 60);
     text("Sum: " + counter, 600, 100);
+    text("You won: " + counter, 600, 140);
+    text("After " + numOfThrows + " throws", 600, 180);
     textSize(17);
     text("500", 137, 590);
     text("400 ", 179, 590);
@@ -163,6 +166,7 @@ function spawnBall() {
             }
             score -=100;
             counter -=100;
+            numOfThrows +=1;
 
             var x = random(390, 420);
             ball = new Particle(x, 150, 10);
